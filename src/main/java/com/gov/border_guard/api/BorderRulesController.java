@@ -9,9 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/border-rules")
 @RequiredArgsConstructor
 public class BorderRulesController {
 
@@ -19,13 +21,13 @@ public class BorderRulesController {
     private final EntityToDtoMapper entityToDtoMapper;
     private final BorderRulesService borderRulesService;
 
-    @PostMapping("/border-rules")
+    @PostMapping
     public ResponseEntity<?> createBorderRules(@RequestBody BorderRulesDto rules) {
         borderRulesService.saveBorderRules(dtoToEntityMapper.toEntity(rules));
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/border-rules")
+    @GetMapping
     public ResponseEntity<BorderRulesDto> createBorderRules() {
         return ResponseEntity.ok(entityToDtoMapper.toDto(borderRulesService.getBorderRules()));
     }
